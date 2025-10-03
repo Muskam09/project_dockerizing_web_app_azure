@@ -19,7 +19,7 @@ def env_list(key: str, default: str = "") -> list[str]:
 SECRET_KEY = os.getenv("SECRET_KEY", "unsafe-dev")  # замени в .env на сильный ключ
 DEBUG = bool(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,0.0.0.0")
+ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,0.0.0.0,smachno-backend-app-container.azurewebsites.net")
 
 # ── Apps ───────────────────────────────────────────────────────────────────────
 INSTALLED_APPS = [
