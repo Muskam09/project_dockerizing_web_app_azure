@@ -1,4 +1,4 @@
-name: Build and deploy frontend to Azure
+name: Frontend Build and deploy to Azure
 
 on:
   push:
