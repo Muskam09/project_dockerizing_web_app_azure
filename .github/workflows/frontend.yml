@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: frontend
-  AZURE_WEBAPP_NAME: culinary-frontend
+  IMAGE_NAME: front-container
+  AZURE_WEBAPP_NAME: smachno-frontend-app-container
 
 jobs:
   build-and-deploy:
