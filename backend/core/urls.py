@@ -12,7 +12,7 @@ from drf_spectacular.views import (
 
 from api.views import health
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from swagger import PublicSwaggerView
+from core.swagger import PublicSwaggerView
 
 urlpatterns = [
     # Редирект на Swagger по имени, без хардкода пути
