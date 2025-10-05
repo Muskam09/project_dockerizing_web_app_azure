@@ -78,43 +78,30 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # ── Database ───────────────────────────────────────────────────────────────────
 # При наличии DATABASE_URL используем её (прод/докер). Иначе — переменные DB_* или SQLite.
-# database_url = os.getenv("DATABASE_URL", "")
+database_url = os.getenv("DATABASE_URL", "")
 
-# if database_url:
-#     DATABASES = {
-#         "default": dj_database_url.config(
-#             default=database_url,
-#             conn_max_age=int(os.getenv("DB_CONN_MAX_AGE", "600")),
-#             ssl_require=env_bool("DB_SSL_REQUIRED", False),
-#         )
-#     }
-# else:
-#     engine = os.getenv("DB_ENGINE", "django.db.backends.sqlite3")
-#     name = os.getenv("DB_NAME", str(BASE_DIR / "db.sqlite3"))
-#     DATABASES = {
-#         "default": {
-#             "ENGINE": engine,
-#             "NAME": name,
-#             "USER": os.getenv("DB_USER", ""),
-#             "PASSWORD": os.getenv("DB_PASSWORD", ""),
-#             "HOST": os.getenv("DB_HOST", ""),
-#             "PORT": os.getenv("DB_PORT", ""),
-#         }
-#     }
-# ── Database by maksimens ───────────────────────────────────────────────────────────────────
+if database_url:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=database_url,
+            conn_max_age=int(os.getenv("DB_CONN_MAX_AGE", "600")),
+            ssl_require=env_bool("DB_SSL_REQUIRED", False),
+        )
+    }
+else:
+    engine = os.getenv("DB_ENGINE", "django.db.backends.sqlite3")
+    name = os.getenv("DB_NAME", str(BASE_DIR / "db.sqlite3"))
+    DATABASES = {
+        "default": {
+            "ENGINE": engine,
+            "NAME": name,
+            "USER": os.getenv("DB_USER", ""),
+            "PASSWORD": os.getenv("DB_PASSWORD", ""),
+            "HOST": os.getenv("DB_HOST", ""),
+            "PORT": os.getenv("DB_PORT", ""),
+        }
+    }
 
-DATABASES = {
-     'default': {
-         'ENGINE': 'django.db.backends.{}'.format(
-             os.getenv('DATABASE_ENGINE', 'sqlite3')
-         ),
-         'NAME': os.getenv('DB_NAME', 'polls'),
-         'USER': os.getenv('DB_USER', 'myprojectuser'),
-         'PASSWORD': os.getenv('DB_PASSWORD', 'password'),
-         'HOST': os.getenv('DATABASE_HOST', '127.0.0.1'),
-         'PORT': os.getenv('DATABASE_PORT', 5432),
-     }
- }
 
 # ── I18N / TZ ──────────────────────────────────────────────────────────────────
 LANGUAGE_CODE = "en-us"

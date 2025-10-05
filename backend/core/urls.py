@@ -12,6 +12,8 @@ from drf_spectacular.views import (
 
 from api.views import health
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework.permissions import AllowAny
+from rest_framework.decorators import permission_classes
 
 urlpatterns = [
     # Редирект на Swagger по имени, без хардкода пути
@@ -25,7 +27,11 @@ urlpatterns = [
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
 
     # Документация
-    path("api/docs/", SpectacularSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
+     path(
+        "api/docs/",
+        permission_classes([AllowAny])(SpectacularSwaggerView.as_view(url_name="schema")),
+        name="swagger-ui"
+    ),
     path("api/redoc/", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 
     # API и аутентификация
