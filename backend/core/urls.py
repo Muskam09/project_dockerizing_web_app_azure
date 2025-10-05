@@ -12,7 +12,7 @@ from drf_spectacular.views import (
 
 from api.views import health
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-from core.swagger import PublicSwaggerView
+from core.swagger import PublicSpectacularAPIView, PublicSwaggerView
 
 urlpatterns = [
     # Редирект на Swagger по имени, без хардкода пути
@@ -23,7 +23,7 @@ urlpatterns = [
     path("api/health/", health, name="health"),
 
     # OpenAPI схема (JSON/YAML через ?format=yaml)
-    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path("api/schema/", PublicSpectacularAPIView.as_view(), name="schema"),
 
     # Документация
     path("api/docs/", PublicSwaggerView.as_view(url_name="schema"), name="swagger-ui"),
